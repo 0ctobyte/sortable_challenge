@@ -15,6 +15,7 @@ def match(product, listing):
 	if title.find(''.join(re.split(r'\W+|_', product['model'].lower()))) == -1:
 		return False
 
-	score = jaro_winklerize_this(title[:len(product_name)], product_name)
+	# Do the jaro-winkler! Sounds like a sweet dance move!
+	score = jaro_winkler(title[:len(product_name)], product_name)
 
 	return True if score >= 0.92 else False

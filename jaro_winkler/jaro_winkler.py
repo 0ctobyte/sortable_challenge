@@ -111,7 +111,7 @@ def jaro_distance(str1, str2):
 	return (0 if m == 0 else ((1.0/3.0)*(float(m)/l1 + float(m)/l2 + 
 			(m-t)/float(m))))
 
-def jaro_winklerize_this(str1, str2):
+def jaro_winkler(str1, str2):
 	str1, str2 = str1.lower(), str2.lower()
 
 	# Get the jaro_distance
