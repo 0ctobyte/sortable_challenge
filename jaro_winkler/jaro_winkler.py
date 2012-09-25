@@ -1,6 +1,6 @@
 def get_match_matrix(str1, str2):
 	# Since we need the length of the strings mutliple times in this function
-	s1, s2, l1, l2 = str1.lower(), str2.lower(), len(str1), len(str2)
+	l1, l2 = len(str1), len(str2)
 
 	# Jaro says two characters are matching if they are the same AND if they
 	# are no further than match_limit away from each other
@@ -16,7 +16,7 @@ def get_match_matrix(str1, str2):
 	# Less comparisons if the outer for statement uses a range with the length 
 	# of the smaller string. The result will not differ either way.
 	if l2 < l1:
-		s1, s2, l1, l2 = s2, s1, l2, l1
+		str1, str2, l1, l2 = str2, str1, l2, l1
 
 	# Let's find those matching characters the Jaro way!
 	for i in range(0, l1):
@@ -25,7 +25,7 @@ def get_match_matrix(str1, str2):
 				continue
 
 			try:
-				if s1[i] == s2[i+j]:
+				if str1[i] == str2[i+j]:
 					match_matrix[l2*i+(i+j)] = 1
 			except IndexError:
 				pass
@@ -33,10 +33,10 @@ def get_match_matrix(str1, str2):
 	return match_matrix
 
 def get_matching_chars(str1, str2, match_matrix):
-	s1, s2, l1, l2 = str1.lower(), str2.lower(), len(str1), len(str2)
+	l1, l2 = len(str1), len(str2)
 
 	if l2 < l1:
-		s1, s2, l1, l2 = s2, s1, l2, l1
+		str1, str2, l1, l2 = str2, str1, l2, l1
 
 	match1_list, match2_list = ['']*l1, ['']*l2
 
@@ -54,7 +54,7 @@ def get_matching_chars(str1, str2, match_matrix):
 				# We are not going to consider subsequent matches to the same 
 				# character as a match.
 				if match1_list[i] == '' and match2_list[j] == '':
-					match1_list[i],	match2_list[j] = s1[i], s2[j]
+					match1_list[i],	match2_list[j] = str1[i], str2[j]
 
 	return ''.join(match1_list), ''.join(match2_list)
 
@@ -70,18 +70,18 @@ def get_transpositions(match1, match2):
 	return transpositions
 
 def get_prefix_match_length(str1, str2):
-	s1, s2, l1, l2 = str1.lower(), str2.lower(), len(str1), len(str2)
+	l1, l2 = len(str1), len(str2)
 
 	prefix_length = 0
 
 	# We iterate over the indices of the smaller string because
 	# we don't want IndexError's
 	if l2 < l1:
-		s1, s2, l1, l2 = s2, s1, l2, l1
+		str1, str2, l1, l2 = str2, str1, l2, l1
 
 	# This will give us the length of the common prefix, if there is any
 	for index in range(0, l1):
-		if s1[index] != s2[index]:
+		if str1[index] != str2[index]:
 			return prefix_length
 		prefix_length += 1
 	
@@ -112,6 +112,8 @@ def jaro_distance(str1, str2):
 			(m-t)/float(m))))
 
 def jaro_winklerize_this(str1, str2):
+	str1, str2 = str1.lower(), str2.lower()
+
 	# Get the jaro_distance
 	j_distance = jaro_distance(str1, str2)
 

@@ -2,6 +2,10 @@ import json, sys
 from datetime import datetime
 from matchers import *
 
+def add_result(result, listing):
+	result['listings'].append(listing)
+	return True
+
 print str(datetime.now())
 
 products_f, listings_f = 'products.txt', 'listings.txt'
@@ -40,33 +44,11 @@ for product in products:
 	# Why listings[:] instead of just listings? To modify the list in place
 	# instead of creating a new reference of course!
 	listings[:] = [listing for listing in listings 
-		if not (match_det1(product, listing) and add_result(results[len(results)-1:][0], listing))]
+		if not (match(product, listing) and add_result(results[len(results)-1:][0], listing))]
 
 	# Some very cool effects so the user knows the program is still alive
 	sys.stdout.write('.')
 	sys.stdout.flush()
-
-print '\nMatch2'
-print '# of listings: ' + str(len(listings))
-
-i = 0
-for product in products:
-	listings[:] = [listing for listing in listings 
-		if not (match_det2(product, listing) and add_result(results[i], listing))]
-	sys.stdout.write('.')
-	sys.stdout.flush()
-	i += 1
-	
-print '\nMatch3'
-print '# of listings: ' + str(len(listings))
-
-i = 0
-for product in products:
-	listings[:] = [listing for listing in listings 
-		if not (match_fuzzy(product, listing) and add_result(results[i], listing))]
-	sys.stdout.write('.')
-	sys.stdout.flush()
-	i += 1
 
 print '\nMatching complete!'
 print '# of leftover listings: ' + str(len(listings))
