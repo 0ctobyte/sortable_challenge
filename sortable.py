@@ -44,6 +44,7 @@ for product in products:
 
 	# Some very cool effects so the user knows the program is still alive
 	sys.stdout.write('.')
+	sys.stdout.flush()
 
 print '\nMatch2'
 print '# of listings: ' + str(len(listings))
@@ -53,6 +54,7 @@ for product in products:
 	listings[:] = [listing for listing in listings 
 		if not (match_det2(product, listing) and add_result(results[i], listing))]
 	sys.stdout.write('.')
+	sys.stdout.flush()
 	i += 1
 	
 print '\nMatch3'
@@ -63,6 +65,7 @@ for product in products:
 	listings[:] = [listing for listing in listings 
 		if not (match_fuzzy(product, listing) and add_result(results[i], listing))]
 	sys.stdout.write('.')
+	sys.stdout.flush()
 	i += 1
 
 print '\nMatching complete!'

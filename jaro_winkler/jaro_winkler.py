@@ -53,7 +53,7 @@ def get_matching_chars(str1, str2, match_matrix):
 				# 'Samsung'[1].
 				# We are not going to consider subsequent matches to the same 
 				# character as a match.
-				if match1_list[i] == '' or match2_list[j] == '':
+				if match1_list[i] == '' and match2_list[j] == '':
 					match1_list[i],	match2_list[j] = s1[i], s2[j]
 
 	return ''.join(match1_list), ''.join(match2_list)
