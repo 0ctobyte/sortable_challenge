@@ -19,8 +19,6 @@ def get_prefix_match_length(str1, str2):
 	return prefix_length
 
 def distance(str1, str2):
-	str1, str2 = str1.lower(), str2.lower()
-
 	# Get the jaro_distance
 	j_distance = jaro.distance(str1, str2)
 
