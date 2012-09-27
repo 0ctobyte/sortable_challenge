@@ -7,6 +7,7 @@ def common_chars(str1, str2):
 	match_limit = max(l1, l2)/2 - 1
 
 	common_chars = ''
+	matched = [0]*l2
 	
 	# Let's find those matching characters the Jaro way!
 	for i in range(0, l1):
@@ -15,9 +16,11 @@ def common_chars(str1, str2):
 			try:
 				if str1[i] == str2[i+j]:
 					common_chars += str1[i]
+					matched[i+j] = 1
 			except IndexError:
-				pass
-	
+				continue
+	print common_chars
+	print matched
 	return common_chars
 
 def transpositions(match1, match2):
