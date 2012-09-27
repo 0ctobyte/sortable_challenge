@@ -1,6 +1,6 @@
 import jaro
 
-def get_prefix_match_length(str1, str2):
+def prefix_match_length(str1, str2):
 	l1, l2 = len(str1), len(str2)
 
 	prefix_length = 0
@@ -24,7 +24,7 @@ def distance(str1, str2):
 
 	# Get the length of the common prefix between the two string 
 	# if there is any.
-	l = get_prefix_match_length(str1, str2)
+	l = prefix_match_length(str1, str2)
 
 	# Mr. Winkler recommends a max of 4 for l (The length of the common prefix)
 	# and a standard of 0.1 for p (the constant scaling factor)

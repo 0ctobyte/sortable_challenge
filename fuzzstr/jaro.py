@@ -1,4 +1,4 @@
-def get_common_chars(str1, str2):
+def common_chars(str1, str2):
 	# Since we need the length of the strings mutliple times in this function
 	l1, l2 = len(str1), len(str2)
 
@@ -20,7 +20,7 @@ def get_common_chars(str1, str2):
 	
 	return common_chars
 
-def get_transpositions(match1, match2):
+def transpositions(match1, match2):
 	transpositions = 0
 
 	# Any matching characters, from each string, that aren't in the same index
@@ -41,7 +41,7 @@ def distance(str1, str2):
 	# first call having str1 as the first parameter and the second call having
 	# str2 as the first parameter. This is because the order of the matching
 	# characters may vary; we use this fact in get_transpositions.
-	match1, match2 = get_common_chars(str1, str2), get_common_chars(str2, str1)
+	match1, match2 = common_chars(str1, str2), common_chars(str2, str1)
 	
 	# match1 and match2 must be the same size. I'm not sure what supposed to
 	# happen if they're not...
@@ -57,7 +57,7 @@ def distance(str1, str2):
 	# The number of differences in the order of the matching characters is the
 	# number of transpositions, according to Jaro. We need half the number
 	# of transpositions
-	t = get_transpositions(match1, match2)/2
+	t = transpositions(match1, match2)/2
 
 	# Calculate the jaro distance
-	return (1.0/3.0)*(float(m)/l1 + float(m)/l2 + (m-t)/float(m))
+	return (1.0/3.0)*(m/float(l1) + m/float(l2) + (m-t)/float(m))
